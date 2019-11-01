@@ -5,7 +5,15 @@
 </template>
 
 <script>
+import websocket from "./utilities/websocket-utility"
 export default {
-  name: 'App'
+  name: 'App',
+  mounted() {
+    websocket.connect()
+  },
+  beforeDestroy() {
+    websocket.disconnect();
+  }
+
 }
 </script>
