@@ -10,13 +10,25 @@ export default {
       console.log(JSON.stringify(evt))
     }
     conn.onmessage = function(evt) {
-      var bodyTypeEndIndex = evt.data.indexOf("\u0017")
-      var bodyType = evt.data.substr(0, bodyTypeEndIndex)
-      var body = evt.data.substr(bodyTypeEndIndex + 1, evt.data.length - 1)
-      console.log(body)
-      if (bodyType === "DeviceStatus") {
-        store.dispatch("DeviceStatus/set", body)
-      }
+        var data = evt.data
+        var i = data.indexOf("\u0017")
+        while(i != -1){
+            var bodyType = data.substr(0, i)
+            var end = data.indexOf("\u0019")
+            var body = data.substr(i + 1, end - 1)
+
+            if (i > 0 && bodyType === "DeviceStatus") {
+                console.log(bodyType)
+                console.log(body)
+                store.dispatch("DeviceStatus/set", body)
+              } else {
+                console.log(bodyType)
+                  console.log(body)
+              }
+
+            data = data.substr(end, data.length)
+            i = data.indexOf("\u0017")
+        }
     }
   },
   disconnect() {
