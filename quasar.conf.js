@@ -48,7 +48,16 @@ module.exports = function (ctx) {
         'QList',
         'QItem',
         'QItemSection',
-        'QItemLabel'
+        'QItemLabel',
+        'QStepper',
+        'QStep',
+        'QTable',
+        'QTh',
+        'QTr',
+        'QTd',
+        'QSelect',
+        'QStepperNavigation',
+        'QLinearProgress'
       ],
       directives: [],
 
@@ -72,6 +81,9 @@ module.exports = function (ctx) {
       // https://quasar.dev/quasar-cli/cli-documentation/handling-webpack
 
       env: {
+        VUE_APP_API_URI: JSON.stringify(
+          "http://129.213.117.253:80"
+        ),
         VUE_APP_WEBSOCKET_URI: JSON.stringify(
           "ws://129.213.117.253:9002/ws"
         )

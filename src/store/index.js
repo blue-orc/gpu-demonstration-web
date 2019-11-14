@@ -2,6 +2,9 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import DeviceStatus from "./modules/device-status"
+import JobStatus from "./modules/job-status"
+import SampleData from "./modules/sample-data"
+import Scripts from "./modules/scripts"
 
 
 Vue.use(Vuex)
@@ -13,7 +16,10 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
-    DeviceStatus
+    DeviceStatus,
+    JobStatus,
+    SampleData,
+    Scripts
   }
 })
 

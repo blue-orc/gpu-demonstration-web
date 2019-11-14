@@ -14,19 +14,27 @@ export default {
         var i = data.indexOf("\u0017")
         while(i != -1){
             var bodyType = data.substr(0, i)
-            var end = data.indexOf("\u0019")
-            var body = data.substr(i + 1, end - 1)
-
-            if (i > 0 && bodyType === "DeviceStatus") {
-                console.log(bodyType)
-                console.log(body)
-                store.dispatch("DeviceStatus/set", body)
-              } else {
-                console.log(bodyType)
-                  console.log(body)
+            var end = data.indexOf(">")
+            var body = data.substr(i + 1, end - i - 1)
+            if (bodyType === "DeviceStatus") {
+              var payload = {
+                state: "GPUUtilization",
+                value: body
               }
+              store.dispatch("DeviceStatus/set", payload)
+            } else if (bodyType === "CPUMemoryUtilization") {
+              var payload = {
+                state: "CPUMemoryUtilization",
+                value: body
+              }
+              store.dispatch("DeviceStatus/set", payload)
+            } else if (bodyType === "JobStatus") {
+                store.dispatch("JobStatus/set", body)
+            } else {
+                return
+            }
 
-            data = data.substr(end, data.length)
+            data = data.substr(end+2, data.length)
             i = data.indexOf("\u0017")
         }
     }

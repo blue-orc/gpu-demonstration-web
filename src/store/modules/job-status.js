@@ -1,6 +1,5 @@
 const state = {
-    GPUUtilization: {},
-    CPUMemoryUtilization: {}
+    jobStatus: {}
   }
   
   const mutations = {
@@ -10,10 +9,10 @@ const state = {
   }
   
   const actions = {
-    set({ commit }, payload) {
+    set({ commit }, jobStatus) {
       var payload = {
-        state: payload.state,
-        value: payload.value
+        state: "jobStatus",
+        value: jobStatus
       }
       commit("set", payload)
     }
