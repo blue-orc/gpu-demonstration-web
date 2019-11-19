@@ -1,17 +1,25 @@
 <template>
   <div class="row justify-center">
     <div class="row justify-around items-center col-12">
-      <q-input outlined v-model="epochs" label="Epochs"></q-input>
-      <q-btn label="cpu" color="secondary" @click="startJob('CPU', selectedScript.Name)" />
-      <q-btn label="gpu" color="secondary" @click="startJob('GPU', selectedScript.Name)" />
+      <q-input outlined v-model="epochs" label="Iterations"></q-input>
+      <div v-if="objectUtility.IsNullOrEmpty(selectedScript)">
+          <span class="text-h5">Please Select a Use Case</span>
+      </div>
+      <div v-else class="q-gutter-x-md">
+        <span class="text-body1">Run using:</span>
+        <q-btn label="cpu" color="secondary" @click="startJob('CPU', selectedScript.Name)" />
+        <q-btn label="gpu" color="secondary" @click="startJob('GPU', selectedScript.Name)" />
+      </div>
     </div>
     <q-stepper
       v-model="step"
-      color="secondary"
       horizontal
       alternative-labels
       flat
       animated
+      active-color="secondary"
+      inactive-color="primary"
+      active-icon="loop"
       transition-next="slide-down"
     >
       <q-step
@@ -28,7 +36,7 @@
 
       <q-step :name="3" title="Training" :done="step > 3">
         <q-linear-progress key="lg" size="lg" :value="percentComplete" color="secondary" />
-        The model is being trained by continually cycling over the entire dataset for {{parseInt(jobStatus.Epochs).toLocaleString('en')}} epochs
+        The model is being trained by continually cycling over the dataset for {{parseInt(jobStatus.Epochs).toLocaleString('en')}} iterations
       </q-step>
 
       <q-step
@@ -41,11 +49,13 @@
 </template>
 <script>
 import api from "../utilities/api-utility";
+import objectUtility from "../utilities/object-utility";
 export default {
   data() {
     return {
       step: 0,
-      epochs: 25000
+      epochs: 25000,
+      objectUtility: objectUtility
     };
   },
   computed: {

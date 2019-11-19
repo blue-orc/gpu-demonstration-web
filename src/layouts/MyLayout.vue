@@ -28,7 +28,7 @@
                 </g>
               </g>
             </svg>
-            <span>High Performance Compute</span>
+            <span class="text-weight-light">High Performance Compute</span>
           </div>
         </q-toolbar-title>
       </q-toolbar>

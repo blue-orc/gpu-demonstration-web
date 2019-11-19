@@ -12,7 +12,7 @@
         <q-card>
           <q-card-section class="text-body2">
             <div class="row q-py-xs justify-between"><span>Use Case:</span> <span>{{res.script}}</span></div>
-            <div class="row q-py-xs justify-between"><span>Epochs:</span> <span>{{parseInt(res.epochs).toLocaleString('en')}}</span></div>
+            <div class="row q-py-xs justify-between"><span>Iterations:</span> <span>{{parseInt(res.epochs).toLocaleString('en')}}</span></div>
             <div class="row q-py-xs justify-between"><span>SQL Query Time:</span> <span>{{res.sqlSeconds}}s</span></div>
             <div class="row q-py-xs justify-between"><span>Training Time:</span> <span>{{res.trainingSeconds}}s</span></div>
             <div class="row q-py-xs justify-between"><span>Accuracy:</span> <span> {{res.accuracy}}</span></div>
