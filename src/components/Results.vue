@@ -1,17 +1,21 @@
 <template>
-   <q-list bordered class="rounded-borders">
+   <q-list separator>
+     <q-item-label header class="text-primary text-h5 text-weight-light">Results</q-item-label>
+     <q-separator/>
       <q-expansion-item
         v-for="(res, i) in results"
         :key="i + 'result'"
         expand-separator
-        :label="res.script"
-        :caption="res.processorType + ' - ' + parseFloat(res.totalSeconds).toFixed(2) + ' seconds - ' + res.time"
+        class="text-body1"
+        :label="res.processorType + ' - ' + parseFloat(res.totalSeconds).toFixed(2) + ' seconds - ' + res.time"
       >
         <q-card>
-          <q-card-section>
-            <p>SQL Query Time: {{res.sqlSeconds}}</p>
-            <p>Training Time: {{res.trainingSeconds}}</p>
-            <p>Accuracy: {{res.accuracy}}</p>
+          <q-card-section class="text-body2">
+            <div class="row q-py-xs justify-between"><span>Use Case:</span> <span>{{res.script}}</span></div>
+            <div class="row q-py-xs justify-between"><span>Epochs:</span> <span>{{parseInt(res.epochs).toLocaleString('en')}}</span></div>
+            <div class="row q-py-xs justify-between"><span>SQL Query Time:</span> <span>{{res.sqlSeconds}}s</span></div>
+            <div class="row q-py-xs justify-between"><span>Training Time:</span> <span>{{res.trainingSeconds}}s</span></div>
+            <div class="row q-py-xs justify-between"><span>Accuracy:</span> <span> {{res.accuracy}}</span></div>
           </q-card-section>
         </q-card>
       </q-expansion-item>
@@ -52,6 +56,7 @@ export default {
                   totalSeconds: val.TotalTime,
                   trainingSeconds: val.TrainingTime,
                   sqlSeconds: val.SqlTime,
+                  epochs: val.Epochs,
                   accuracy: parseFloat(val.Accuracy).toFixed(2) + "%",
                   time: this.getFormattedTime()
               }

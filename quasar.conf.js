@@ -51,6 +51,11 @@ module.exports = function (ctx) {
         'QItemLabel',
         'QStepper',
         'QStep',
+        'QTabs',
+        'QTab',
+        'QRouteTab',
+        'QTabPanels',
+        'QTabPanel',
         'QTable',
         'QTh',
         'QTr',
@@ -62,7 +67,7 @@ module.exports = function (ctx) {
       directives: [],
 
       // Quasar plugins
-      plugins: []
+      plugins: [ 'Meta' ]
     },
 
     // https://quasar.dev/quasar-cli/cli-documentation/supporting-ie
@@ -111,7 +116,7 @@ module.exports = function (ctx) {
       // workboxPluginMode: 'InjectManifest',
       // workboxOptions: {}, // only for NON InjectManifest
       manifest: {
-        // name: 'Demonstration for GPU',
+        name: 'Oracle Compute Resource Demonstration',
         // short_name: 'Demonstration for GPU',
         // description: 'Demonstration for GPU',
         display: 'standalone',

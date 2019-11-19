@@ -1,23 +1,22 @@
 <template>
-  <q-page class="flex flex-top row">
-    <div class="col-3">
+  <q-page class="flex flex-top row q-py-xl">
+    <div class="col-3 q-px-md">
       <ScriptList />
     </div>
-    <div class="col-6">
+    <div class="col-6 q-px-md">
       <q-tabs
         v-model="tab"
         dense
-        class="text-grey"
-        active-color="primary"
-        indicator-color="primary"
+        class="text-primary"
+        active-color="secondary"
+        indicator-color="secondary"
         align="justify"
+        size="50"
         narrow-indicator
       >
-        <q-tab name="data" label="Data" />
-        <q-tab name="training" label="Model Training" />
+        <q-tab name="data" class="text-h5 text-weight-light text-capitalize q-py-sm">Data</q-tab>
+        <q-tab name="training" class="text-h5 text-weight-light text-capitalize q-py-sm">Model Training</q-tab>
       </q-tabs>
-
-      <q-separator />
 
       <q-tab-panels v-model="tab" animated>
         <q-tab-panel name="data"><SampleData/></q-tab-panel>
@@ -33,7 +32,7 @@
         </q-tab-panel>
       </q-tab-panels>
     </div>
-    <div class="col-3">
+    <div class="col-3 q-px-md">
       <Results />
     </div>
   </q-page>
@@ -46,6 +45,7 @@ import SampleData from "../components/SampleData";
 import ScriptList from "../components/ScriptList";
 import TrainingStepper from "../components/TrainingStepper";
 export default {
+  title: "Oracle Cloud Compute Demonstration",
   name: "PageIndex",
   data(){
     return {
@@ -125,3 +125,9 @@ export default {
   }
 };
 </script>
+
+<style lang="stylus" scoped>
+.tab {
+  padding:30px;
+}
+</style>

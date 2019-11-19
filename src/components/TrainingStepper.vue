@@ -1,13 +1,13 @@
 <template>
   <div class="row justify-center">
-    <div class="row justify-between">
-      <span>{{selectedScript.Name}} on {{selectedScript.Processor}}</span>
-      <q-btn label="cpu" color="primary" @click="startJob('CPU', selectedScript.Name)" />
-      <q-btn label="gpu" color="primary" @click="startJob('GPU', selectedScript.Name)" />
+    <div class="row justify-around items-center col-12">
+      <q-input outlined v-model="epochs" label="Epochs"></q-input>
+      <q-btn label="cpu" color="secondary" @click="startJob('CPU', selectedScript.Name)" />
+      <q-btn label="gpu" color="secondary" @click="startJob('GPU', selectedScript.Name)" />
     </div>
     <q-stepper
       v-model="step"
-      color="primary"
+      color="secondary"
       horizontal
       alternative-labels
       flat
@@ -22,18 +22,18 @@
 
       <q-step
         :name="2"
-        title="Preparing the Model"
+        title="Preparing"
         :done="step > 2"
       >The data is being transformed into a tensor and initialized for the processor</q-step>
 
-      <q-step :name="3" title="Training the Model" :done="step > 3">
-        <q-linear-progress key="lg" size="lg" :value="percentComplete" color="primary" />
+      <q-step :name="3" title="Training" :done="step > 3">
+        <q-linear-progress key="lg" size="lg" :value="percentComplete" color="secondary" />
         The model is being trained by continually cycling over the entire dataset for {{parseInt(jobStatus.Epochs).toLocaleString('en')}} epochs
       </q-step>
 
       <q-step
         :name="4"
-        title="Testing the Model"
+        title="Testing"
         :done="step > 4"
       >The model is being tested for accuracy</q-step>
     </q-stepper>
@@ -44,7 +44,8 @@ import api from "../utilities/api-utility";
 export default {
   data() {
     return {
-      step: 0
+      step: 0,
+      epochs: 25000
     };
   },
   computed: {
@@ -92,7 +93,7 @@ export default {
         controller: "pythonJobRunner",
         queryParameters: {
           scriptID: filtered[0].ID,
-          epochs: 50000
+          epochs: this.epochs
         }
       };
       await api.getNoAuth(request);
