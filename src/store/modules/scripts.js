@@ -2,7 +2,8 @@ import api from "../../utilities/api-utility"
 
 const state = {
     scripts: [],
-    selectedScript:{}
+    selectedScript:{},
+    processor: ''
 }
 
 const mutations = {
@@ -32,8 +33,14 @@ const actions = {
             value: script
         };
         commit("set", payload);
+    },
+    setProcessor({ commit }, processor) {
+        var payload = {
+            state: "processor",
+            value: processor
+        };
+        commit("set", payload)
     }
-    
 }
 
 const getters = {

@@ -17,8 +17,14 @@ import api from '../utilities/api-utility'
 export default {
     computed:{
         scripts(){
-            console.log(this.$store.state)
-            return this.$store.state.Scripts.scripts
+            var ss = this.$store.state.Scripts.scripts
+            var res = []
+            for (var s of ss){
+                if (res.findIndex(x => x.Name === s.Name) === -1){
+                    res.push(s)
+                }
+            }
+            return res
         }
     },
     created(){
@@ -27,15 +33,6 @@ export default {
     methods:{
         select(script){
             this.$store.dispatch("Scripts/select", script)
-        },
-        async startJob(id){
-            var request = {
-                controller: "pythonJobRunner",
-                queryParameters: {
-                    scriptID: id
-                }
-            }
-            await api.getNoAuth(request)
         }
     }
 

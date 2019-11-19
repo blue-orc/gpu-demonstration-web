@@ -1,55 +1,27 @@
 <template>
-  <q-table title="Results" :data="results" :columns="columns" row-key="name" />
+   <q-list bordered class="rounded-borders">
+      <q-expansion-item
+        v-for="(res, i) in results"
+        :key="i + 'result'"
+        expand-separator
+        :label="res.script"
+        :caption="res.processorType + ' - ' + parseFloat(res.totalSeconds).toFixed(2) + ' seconds - ' + res.time"
+      >
+        <q-card>
+          <q-card-section>
+            <p>SQL Query Time: {{res.sqlSeconds}}</p>
+            <p>Training Time: {{res.trainingSeconds}}</p>
+            <p>Accuracy: {{res.accuracy}}</p>
+          </q-card-section>
+        </q-card>
+      </q-expansion-item>
+   </q-list>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      columns: [
-          {
-          name: "script",
-          field: "script",
-          label: "Script",
-          align: "center",
-          sortable: true
-        },
-        {
-          name: "processorType",
-          field: "processorType",
-          label: "Processor",
-          align: "center",
-          sortable: true
-        },
-        {
-          name: "totalSeconds",
-          field: "totalSeconds",
-          label: "Total (s)",
-          align: "center",
-          sortable: true
-        },
-        {
-          name: "trainingSeconds",
-          field: "trainingSeconds",
-          label: "Train (s)",
-          align: "center",
-          sortable: true
-        },
-        {
-          name: "sqlSeconds",
-          field: "sqlSeconds",
-          label: "Data Query (s)",
-          align: "center",
-          sortable: true
-        },
-
-        {
-          name: "accuracy",
-          field: "accuracy",
-          label: "Accuracy",
-          align: "center"
-        }
-      ],
       results: []
     };
   },
@@ -58,18 +30,32 @@ export default {
       return this.$store.state.JobStatus.jobStatus;
     }
   },
+  methods:{
+    getFormattedTime(){
+      var date = new Date()
+      var h = date.getHours()
+      var ampm = "AM"
+      if (h > 12){
+        h = h-12
+        ampm = "PM"
+      }
+      var res = h + ":" + date.getMinutes().toString().padStart(2, 0) + ":" + date.getSeconds().toString().padStart(2, 0) + " " + ampm
+      return res
+    }
+  },
   watch: {
       jobStatus(val, old){
           if (val.Step === "Finished" && old.Step !== val.Step){
               var res = {
-                  script:"sample",
-                  processorType:"GPU",
+                  script: val.ScriptName,
+                  processorType: val.Processor,
                   totalSeconds: val.TotalTime,
                   trainingSeconds: val.TrainingTime,
                   sqlSeconds: val.SqlTime,
-                  accuracy: 100
+                  accuracy: parseFloat(val.Accuracy).toFixed(2) + "%",
+                  time: this.getFormattedTime()
               }
-              this.results.push(res)
+              this.results.unshift(res)
           }
       }
   }
