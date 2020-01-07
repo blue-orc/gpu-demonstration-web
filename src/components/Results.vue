@@ -15,7 +15,7 @@
             <div class="row q-py-xs justify-between"><span>Iterations:</span> <span>{{parseInt(res.epochs).toLocaleString('en')}}</span></div>
             <div class="row q-py-xs justify-between"><span>SQL Query Time:</span> <span>{{res.sqlSeconds}}s</span></div>
             <div class="row q-py-xs justify-between"><span>Training Time:</span> <span>{{res.trainingSeconds}}s</span></div>
-            <div class="row q-py-xs justify-between"><span>Accuracy:</span> <span> {{res.accuracy}}</span></div>
+            <div class="row q-py-xs justify-between"><span>Standard Error:</span> <span> {{res.accuracy}}</span></div>
           </q-card-section>
         </q-card>
       </q-expansion-item>

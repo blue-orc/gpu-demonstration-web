@@ -30,7 +30,9 @@
 </template>
 
 <script>
+
 export default {
+
   computed: {
     CPUMemoryUtilization() {
       return this.$store.state.DeviceStatus.CPUMemoryUtilization;

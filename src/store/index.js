@@ -6,6 +6,7 @@ import HighchartsVue from 'highcharts-vue'
 import DeviceStatus from "./modules/device-status"
 import JobStatus from "./modules/job-status"
 import SampleData from "./modules/sample-data"
+import Settings from "./modules/settings"
 import Scripts from "./modules/scripts"
 
 
@@ -22,6 +23,7 @@ export default new Vuex.Store({
     DeviceStatus,
     JobStatus,
     SampleData,
+    Settings,
     Scripts
   }
 })

@@ -1,14 +1,24 @@
 <template>
   <div class="column">
+    <CPUInfo/>
     <highcharts class="chart" :options="cpuChartOptions"/>
+    <GPUInfo/>
     <highcharts class="chart" :options="gpuChartOptions"/>
   </div>
 </template>
 
 <script>
 import { Chart } from "highcharts-vue";
+import CPUInfo from "./CPUInfo";
+import GPUInfo from "./GPUInfo";
+
 export default {
-    props:['GPUData', 'CPUData', 'ChartTitle'],
+  components: {
+    highcharts: Chart,
+    CPUInfo,
+    GPUInfo
+  },
+  props:['GPUData', 'CPUData', 'ChartTitle'],
   data() {
     return {
       cpuChartOptions: {
@@ -80,9 +90,6 @@ export default {
         ]
       }
     };
-  },
-  components: {
-    highcharts: Chart
   }
 };
 </script>

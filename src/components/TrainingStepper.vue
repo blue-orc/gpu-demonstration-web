@@ -54,11 +54,22 @@ export default {
   data() {
     return {
       step: 0,
-      epochs: 25000,
       objectUtility: objectUtility
     };
   },
   computed: {
+    epochs: {
+      get() {
+        return this.$store.state.Settings.epochs;
+      },
+      set(input) {
+        var payload = {
+          state: 'epochs',
+          value: input 
+        }
+        this.$store.commit('Settings/set', payload)
+      }
+    },
     percentComplete() {
       var pctComplete = this.$store.state.JobStatus.jobStatus.PercentComplete;
       if (this.jobStatus.Step === "Finished") {

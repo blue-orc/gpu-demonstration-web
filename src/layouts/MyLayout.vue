@@ -28,7 +28,7 @@
                 </g>
               </g>
             </svg>
-            <span class="text-weight-light">High Performance Compute</span>
+            <span class="text-weight-light">Performance Computing</span>
           </div>
         </q-toolbar-title>
       </q-toolbar>
@@ -48,6 +48,9 @@ export default {
     return {
       leftDrawerOpen: false
     };
+  },
+  created(){
+    this.$store.dispatch("DeviceStatus/getCPUGPUInfo")
   }
 };
 </script>
