@@ -1,5 +1,5 @@
 const state = {
-    epochs: 25000
+    epochs: 15000
 }
 
 const mutations = {
@@ -21,4 +21,4 @@ export default {
     mutations,
     actions
 }
-  
+    
